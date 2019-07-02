@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     public float inAirSpeed;
     public float jumpSpeed;
 
+    private bool inAir;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +24,6 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        bool inAir = transform.position.y > 0.51;
         float moveH = Input.GetAxis("Horizontal");
         float moveV = Input.GetAxis("Vertical");
         bool jumpPressed = Input.GetKeyDown(KeyCode.Space);
@@ -41,5 +42,28 @@ public class PlayerController : MonoBehaviour
 
         body.AddForce(movement * factor * Time.deltaTime);
         body.AddForce(jump * jumpSpeed * Time.deltaTime);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "Ground") {
+            inAir = false;
+        }
+
+        if (collision.gameObject.tag == "Wall") {
+            if (inAir) {
+                // game over
+            } else {
+                // play collision sound
+            }
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.name == "Ground") {
+            inAir = true;
+        }
+
     }
 }
