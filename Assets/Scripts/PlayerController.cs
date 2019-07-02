@@ -64,6 +64,5 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.name == "Ground") {
             inAir = true;
         }
-
     }
 }
