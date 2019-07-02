@@ -8,12 +8,16 @@ public class PlayerController : MonoBehaviour
     public float inAirSpeed;
     public float jumpSpeed;
 
+    private AudioSource bumpSound;
+    private AudioSource jumpSound;
     private bool inAir;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        AudioSource[] audioSources = GetComponents<AudioSource>();
+        bumpSound = audioSources[0];
+        jumpSound = audioSources[1];
     }
 
     // Update is called once per frame
@@ -38,6 +42,7 @@ public class PlayerController : MonoBehaviour
             factor = inAirSpeed;
         } else if (jumpPressed) {
             jump.y = 10;
+            jumpSound.Play();
         }
 
         body.AddForce(movement * factor * Time.deltaTime);
@@ -54,7 +59,7 @@ public class PlayerController : MonoBehaviour
             if (inAir) {
                 // game over
             } else {
-                // play collision sound
+                bumpSound.Play();
             }
         }
     }
