@@ -39,7 +39,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    void TogglePause()
+    public void TogglePause()
     {
         if (gameIsPaused) {
             Resume();
