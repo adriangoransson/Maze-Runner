@@ -1,22 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
     public GameObject Wall;
     public GameObject boundary;
+    public GameObject timer;
+
+    private float time;
+    private Text timerText;
 
     // Start is called before the first frame update
     void Start()
     {
         InstantiateMaze(50);
         SetBounds(50);
+        time = Time.time;
+        timerText = timer.GetComponent<Text>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        time += Time.deltaTime;
+        timerText.text = SecondsToString((int)time);
 
     }
 
@@ -43,5 +52,16 @@ public class GameController : MonoBehaviour
     {
         BoxCollider b = boundary.GetComponent<BoxCollider>();
         b.size = new Vector3(size, size, size);
+    }
+
+    private string SecondsToString(int seconds)
+    {
+        int minutes = seconds / 60;
+        seconds = seconds % 60;
+
+        string min = minutes > 9 ? minutes.ToString() : "0" + minutes;
+        string sec = seconds > 9 ? seconds.ToString() : "0" + seconds;
+
+        return min + ":" + sec;
     }
 }
