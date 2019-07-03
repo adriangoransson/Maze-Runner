@@ -11,6 +11,9 @@ public class GameController : MonoBehaviour
     public GameObject menu;
     public Button menuButton;
 
+    private int size;
+    private int seed;
+
     private float time;
     private Text timerText;
     private bool gameIsPaused;
@@ -18,8 +21,12 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InstantiateMaze(50);
-        SetBounds(50);
+        size = PlayerPrefs.GetInt(MainMenuController.SIZE_KEY);
+        seed = PlayerPrefs.GetInt(MainMenuController.SEED_KEY);
+
+        InstantiateMaze();
+        SetBounds();
+
         time = Time.time;
         timerText = timer.GetComponent<Text>();
         gameIsPaused = false;
@@ -79,10 +86,10 @@ public class GameController : MonoBehaviour
         print("Game over");
     }
 
-    private void InstantiateMaze(int size)
+    private void InstantiateMaze()
     {
         MazeGenerator mg = new MazeGenerator();
-        int[,] maze = mg.GenerateMaze(size, 1230123);
+        int[,] maze = mg.GenerateMaze(size, seed);
 
         for (int row = 0; row < maze.GetLength(0); row++) {
             int x = row;
@@ -98,7 +105,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void SetBounds(int size)
+    private void SetBounds()
     {
         BoxCollider b = boundary.GetComponent<BoxCollider>();
         b.size = new Vector3(size, size, size);
