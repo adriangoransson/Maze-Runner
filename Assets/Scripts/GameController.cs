@@ -9,9 +9,22 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        InstantiateMaze();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    private void InstantiateMaze()
+    {
         MazeGenerator mg = new MazeGenerator();
 
-        int[,] maze = mg.GenerateMaze(30, 1230123);
+        int size = 50;
+
+        int[,] maze = mg.GenerateMaze(size, 1230123);
 
         for (int row = 0; row < maze.GetLength(0); row++) {
             int x = row;
@@ -20,19 +33,10 @@ public class GameController : MonoBehaviour
                 int z = column;
 
                 if (maze[row, column] == 1) {
-                    Vector3 pos = new Vector3(x, Wall.transform.position.y, z);
+                    Vector3 pos = new Vector3(x - (size / 2), Wall.transform.position.y, z - (size / 2));
                     Instantiate(Wall, pos, Quaternion.identity);
                 }
             }
         }
-
-        Vector3 v = new Vector3(0, 0, 0);
-        Instantiate(Wall, v, Quaternion.identity);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }
