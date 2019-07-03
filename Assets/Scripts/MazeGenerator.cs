@@ -7,7 +7,7 @@ public class MazeGenerator
     {
         Random rand = new Random(seed);
 
-        float placementThreshold = .1f;
+        float placementThreshold = .4f;
 
         int[,] maze = new int[size, size];
 
@@ -17,7 +17,7 @@ public class MazeGenerator
         for (int i = 0; i <= rMax; i++) {
             for (int j = 0; j <= cMax; j++) {
                 //1
-                if (i == 0 || j == 0 || i == rMax || j == cMax) {
+                if (i == 0 || j == 0 || i == rMax || j == cMax && rand.NextDouble() < .3) {
                     maze[i, j] = 1;
                 }
 
