@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     public float inAirSpeed;
     public float jumpSpeed;
 
+    private bool hasStarted = false;
+
     private AudioSource bumpSound;
     private AudioSource jumpSound;
     private bool inAir;
@@ -28,6 +30,10 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!hasStarted) {
+            return;
+        }
+
         float moveH = Input.GetAxis("Horizontal");
         float moveV = Input.GetAxis("Vertical");
         bool jumpPressed = Input.GetKeyDown(KeyCode.Space);
@@ -52,6 +58,7 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.name == "Ground") {
+            hasStarted = true;
             inAir = false;
         }
 
