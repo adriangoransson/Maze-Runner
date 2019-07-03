@@ -26,7 +26,21 @@ public class GameController : MonoBehaviour
     {
         time += Time.deltaTime;
         timerText.text = SecondsToString((int)time);
+    }
 
+    public void AddPenalty()
+    {
+        time += 5;
+    }
+
+    public void WinGame()
+    {
+        print("Win");
+    }
+
+    public void GameOver()
+    {
+        print("Game over");
     }
 
     private void InstantiateMaze(int size)

@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     private bool hasStarted = false;
 
+    private GameController controller;
     private AudioSource bumpSound;
     private AudioSource jumpSound;
     private bool inAir;
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject go = GameObject.FindGameObjectWithTag("GameController");
+        controller = go.GetComponent<GameController>();
         AudioSource[] audioSources = GetComponents<AudioSource>();
         bumpSound = audioSources[0];
         jumpSound = audioSources[1];
@@ -64,8 +67,9 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.tag == "Wall") {
             if (inAir) {
-                // game over
+                controller.GameOver();
             } else {
+                controller.AddPenalty();
                 bumpSound.Play();
             }
         }
