@@ -5,11 +5,13 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public GameObject Wall;
+    public GameObject boundary;
 
     // Start is called before the first frame update
     void Start()
     {
-        InstantiateMaze();
+        InstantiateMaze(50);
+        SetBounds(50);
     }
 
     // Update is called once per frame
@@ -18,12 +20,9 @@ public class GameController : MonoBehaviour
 
     }
 
-    private void InstantiateMaze()
+    private void InstantiateMaze(int size)
     {
         MazeGenerator mg = new MazeGenerator();
-
-        int size = 50;
-
         int[,] maze = mg.GenerateMaze(size, 1230123);
 
         for (int row = 0; row < maze.GetLength(0); row++) {
@@ -38,5 +37,11 @@ public class GameController : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void SetBounds(int size)
+    {
+        BoxCollider b = boundary.GetComponent<BoxCollider>();
+        b.size = new Vector3(size, size, size);
     }
 }
