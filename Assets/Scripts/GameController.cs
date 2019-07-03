@@ -21,13 +21,14 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Resume();
         size = PlayerPrefs.GetInt(MainMenuController.SIZE_KEY);
         seed = PlayerPrefs.GetInt(MainMenuController.SEED_KEY);
 
         InstantiateMaze();
         SetBounds();
 
-        time = Time.time;
+        time = 0;
         timerText = timer.GetComponent<Text>();
         gameIsPaused = false;
         menu.SetActive(false);

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class MenuController : MonoBehaviour
+public class GameMenuController : MonoBehaviour
 {
 
     private GameController gameController;
@@ -20,14 +21,14 @@ public class MenuController : MonoBehaviour
         gameController = go.GetComponent<GameController>();
 
         resumeButton.onClick.AddListener(gameController.TogglePause);
+        newGameButton.onClick.AddListener(NewGame);
 
         quitButton.onClick.AddListener(Quit);
     }
 
-    // Update is called once per frame
-    void Update()
+    void NewGame()
     {
-
+        SceneManager.LoadScene(0);
     }
 
     void Quit()
