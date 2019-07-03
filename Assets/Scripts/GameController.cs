@@ -8,9 +8,12 @@ public class GameController : MonoBehaviour
     public GameObject Wall;
     public GameObject boundary;
     public GameObject timer;
+    public GameObject menu;
+    public Button menuButton;
 
     private float time;
     private Text timerText;
+    private bool gameIsPaused;
 
     // Start is called before the first frame update
     void Start()
@@ -19,13 +22,46 @@ public class GameController : MonoBehaviour
         SetBounds(50);
         time = Time.time;
         timerText = timer.GetComponent<Text>();
+        gameIsPaused = false;
+        menu.SetActive(false);
+
+        menuButton.onClick.AddListener(TogglePause);
     }
 
     // Update is called once per frame
     void Update()
     {
-        time += Time.deltaTime;
-        timerText.text = SecondsToString((int)time);
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            TogglePause();
+        } else if (!gameIsPaused) {
+            time += Time.deltaTime;
+            timerText.text = SecondsToString((int)time);
+        }
+    }
+
+    void TogglePause()
+    {
+        if (gameIsPaused) {
+            Resume();
+        } else {
+            Pause();
+        }
+    }
+
+    void Pause()
+    {
+        print("Pause");
+        menu.SetActive(true);
+        gameIsPaused = true;
+        Time.timeScale = 0;
+    }
+
+    void Resume()
+    {
+        print("Resume");
+        menu.SetActive(false);
+        gameIsPaused = false;
+        Time.timeScale = 1;
     }
 
     public void AddPenalty()
