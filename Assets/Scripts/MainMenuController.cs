@@ -31,12 +31,7 @@ public class MainMenuController : MonoBehaviour
 
         levelInput.onValueChanged.AddListener(InputChanged);
 
-        if (PlayerPrefs.HasKey(SIZE_KEY)) {
-            size = PlayerPrefs.GetInt(SIZE_KEY);
-        } else {
-            SetSize(MEDIUM);
-        }
-
+        size = PlayerPrefs.GetInt(SIZE_KEY, MEDIUM);
         seed = PlayerPrefs.GetInt(SEED_KEY, GetNewSeed());
         UpdateTextField();
     }
