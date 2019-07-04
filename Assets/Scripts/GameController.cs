@@ -58,7 +58,6 @@ public class GameController : MonoBehaviour
 
     void Pause()
     {
-        print("Pause");
         menu.SetActive(true);
         gameIsPaused = true;
         Time.timeScale = 0;
@@ -66,7 +65,6 @@ public class GameController : MonoBehaviour
 
     void Resume()
     {
-        print("Resume");
         menu.SetActive(false);
         gameIsPaused = false;
         Time.timeScale = 1;
