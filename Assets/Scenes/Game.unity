@@ -2349,7 +2349,7 @@ MonoBehaviour:
   menu: {fileID: 1951369297}
   menuButton: {fileID: 1020788359}
   gameOverText: {fileID: 111250789}
-  WinText: {fileID: 939899111}
+  winText: {fileID: 939899111}
 --- !u!82 &1696122063
 AudioSource:
   m_ObjectHideFlags: 0

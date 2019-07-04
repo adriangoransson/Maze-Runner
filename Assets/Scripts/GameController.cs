@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour
     public Button menuButton;
 
     public GameObject gameOverText;
-    public GameObject WinText;
+    public GameObject winText;
 
     private int size;
     private int seed;
@@ -42,7 +42,7 @@ public class GameController : MonoBehaviour
         gameIsWon = false;
 
         gameOverText.SetActive(false);
-        WinText.SetActive(false);
+        winText.SetActive(false);
         menu.SetActive(false);
 
         menuButton.onClick.AddListener(TogglePause);
@@ -57,7 +57,7 @@ public class GameController : MonoBehaviour
             if (gameIsOver) {
                 gameOverText.SetActive(true);
             } else {
-                WinText.SetActive(true);
+                winText.SetActive(true);
             }
 
             if (Input.GetKeyDown(KeyCode.R)) {
