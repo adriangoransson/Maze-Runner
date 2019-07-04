@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
@@ -11,12 +12,15 @@ public class GameController : MonoBehaviour
     public GameObject menu;
     public Button menuButton;
 
+    public GameObject GameOverText;
+
     private int size;
     private int seed;
 
     private float time;
     private Text timerText;
     private bool gameIsPaused;
+    private bool gameIsOver;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +34,11 @@ public class GameController : MonoBehaviour
 
         time = 0;
         timerText = timer.GetComponent<Text>();
+
         gameIsPaused = false;
+        gameIsOver = false;
+
+        GameOverText.SetActive(false);
         menu.SetActive(false);
 
         menuButton.onClick.AddListener(TogglePause);
@@ -39,7 +47,17 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (gameIsOver) {
+            GameOverText.SetActive(true);
+            Time.timeScale = 0;
+
+            if (Input.GetKeyDown(KeyCode.R)) {
+                Scene scene = SceneManager.GetActiveScene();
+                SceneManager.LoadScene(scene.name);
+            } else if (Input.GetKeyDown(KeyCode.Escape)) {
+                SceneManager.LoadScene(0);
+            }
+        } else if (Input.GetKeyDown(KeyCode.Escape)) {
             TogglePause();
         } else if (!gameIsPaused) {
             time += Time.deltaTime;
@@ -82,7 +100,7 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
-        print("Game over");
+        gameIsOver = true;
     }
 
     private void InstantiateMaze()
