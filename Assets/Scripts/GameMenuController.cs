@@ -10,9 +10,9 @@ public class GameMenuController : MonoBehaviour
     private GameController gameController;
 
     public Button resumeButton;
-    public Button newGameButton;
+    public Button restartButton;
     public Button audioButton;
-    public Button quitButton;
+    public Button mainMenuButton;
 
     // Start is called before the first frame update
     void Start()
@@ -21,22 +21,19 @@ public class GameMenuController : MonoBehaviour
         gameController = go.GetComponent<GameController>();
 
         resumeButton.onClick.AddListener(gameController.TogglePause);
-        newGameButton.onClick.AddListener(NewGame);
+        restartButton.onClick.AddListener(RestartGame);
 
-        quitButton.onClick.AddListener(Quit);
+        mainMenuButton.onClick.AddListener(GoToMainMenu);
     }
 
-    void NewGame()
+    void RestartGame()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
+    }
+
+    void GoToMainMenu()
     {
         SceneManager.LoadScene(0);
-    }
-
-    void Quit()
-    {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit ();
-#endif
     }
 }

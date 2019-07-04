@@ -15,7 +15,7 @@ public class MainMenuController : MonoBehaviour
     private const int HARD = 60;
 
     public InputField levelInput;
-    public Button easyButton, mediumButton, hardButton, newSeedButton, playButton;
+    public Button easyButton, mediumButton, hardButton, newSeedButton, playButton, highScoreButton, quitButton;
 
     private int size;
     private int seed;
@@ -28,6 +28,9 @@ public class MainMenuController : MonoBehaviour
         hardButton.onClick.AddListener(() => SetSize(HARD));
         newSeedButton.onClick.AddListener(NewSeed);
         playButton.onClick.AddListener(StartGame);
+
+        highScoreButton.onClick.AddListener(OpenHighScores);
+        quitButton.onClick.AddListener(Quit);
 
         levelInput.onValueChanged.AddListener(InputChanged);
 
@@ -102,5 +105,19 @@ public class MainMenuController : MonoBehaviour
         SavePrefs();
 
         SceneManager.LoadScene(1);
+    }
+
+    private void OpenHighScores()
+    {
+        print("Highscores");
+    }
+
+    private void Quit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }
