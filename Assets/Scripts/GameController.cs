@@ -12,7 +12,8 @@ public class GameController : MonoBehaviour
     public GameObject menu;
     public Button menuButton;
 
-    public GameObject GameOverText;
+    public GameObject gameOverText;
+    public GameObject WinText;
 
     private int size;
     private int seed;
@@ -21,6 +22,7 @@ public class GameController : MonoBehaviour
     private Text timerText;
     private bool gameIsPaused;
     private bool gameIsOver;
+    private bool gameIsWon;
 
     // Start is called before the first frame update
     void Start()
@@ -37,8 +39,10 @@ public class GameController : MonoBehaviour
 
         gameIsPaused = false;
         gameIsOver = false;
+        gameIsWon = false;
 
-        GameOverText.SetActive(false);
+        gameOverText.SetActive(false);
+        WinText.SetActive(false);
         menu.SetActive(false);
 
         menuButton.onClick.AddListener(TogglePause);
@@ -47,9 +51,14 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameIsOver) {
-            GameOverText.SetActive(true);
+        if (gameIsOver || gameIsWon) {
             Time.timeScale = 0;
+
+            if (gameIsOver) {
+                gameOverText.SetActive(true);
+            } else {
+                WinText.SetActive(true);
+            }
 
             if (Input.GetKeyDown(KeyCode.R)) {
                 Scene scene = SceneManager.GetActiveScene();
@@ -59,10 +68,15 @@ public class GameController : MonoBehaviour
             }
         } else if (Input.GetKeyDown(KeyCode.Escape)) {
             TogglePause();
-        } else if (!gameIsPaused) {
-            time += Time.deltaTime;
-            timerText.text = SecondsToString((int)time);
         }
+
+        if (gameIsPaused) {
+            return;
+        }
+
+
+        time += Time.deltaTime;
+        timerText.text = SecondsToString((int)time);
     }
 
     public void TogglePause()
@@ -95,7 +109,7 @@ public class GameController : MonoBehaviour
 
     public void WinGame()
     {
-        print("Win");
+        gameIsWon = true;
     }
 
     public void GameOver()
