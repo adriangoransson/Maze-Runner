@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -15,28 +13,60 @@ public class MainMenuController : MonoBehaviour
     private const int HARD = 60;
 
     public InputField levelInput;
-    public Button easyButton, mediumButton, hardButton, newSeedButton, playButton, highScoreButton, quitButton;
 
     private int size;
     private int seed;
 
-    // Start is called before the first frame update
     void Start()
     {
-        easyButton.onClick.AddListener(() => SetSize(EASY));
-        mediumButton.onClick.AddListener(() => SetSize(MEDIUM));
-        hardButton.onClick.AddListener(() => SetSize(HARD));
-        newSeedButton.onClick.AddListener(NewSeed);
-        playButton.onClick.AddListener(StartGame);
-
-        highScoreButton.onClick.AddListener(OpenHighScores);
-        quitButton.onClick.AddListener(Quit);
-
         levelInput.onValueChanged.AddListener(InputChanged);
 
         size = PlayerPrefs.GetInt(SIZE_KEY, MEDIUM);
         seed = PlayerPrefs.GetInt(SEED_KEY, GetNewSeed());
+
         UpdateTextField();
+    }
+
+    public void EasySize()
+    {
+        SetSize(EASY);
+    }
+
+    public void MediumSize()
+    {
+        SetSize(MEDIUM);
+    }
+
+    public void HardSize()
+    {
+        SetSize(HARD);
+    }
+
+    public void NewSeed()
+    {
+        seed = GetNewSeed();
+        UpdateTextField();
+    }
+
+    public void StartGame()
+    {
+        SavePrefs();
+
+        SceneManager.LoadScene(1);
+    }
+
+    public void OpenHighScores()
+    {
+        print("Highscores");
+    }
+
+    public void Quit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
     private void InputChanged(string input)
@@ -66,10 +96,6 @@ public class MainMenuController : MonoBehaviour
         }
     }
 
-    private void SetSelectedButton()
-    {
-    }
-
     private void SetSize(int newSize)
     {
         size = newSize;
@@ -79,12 +105,6 @@ public class MainMenuController : MonoBehaviour
     private int GetNewSeed()
     {
         return (int)(UnityEngine.Random.value * 100000);
-    }
-
-    private void NewSeed()
-    {
-        seed = GetNewSeed();
-        UpdateTextField();
     }
 
     private void UpdateTextField()
@@ -98,26 +118,5 @@ public class MainMenuController : MonoBehaviour
         PlayerPrefs.SetInt(SIZE_KEY, size);
         PlayerPrefs.SetInt(SEED_KEY, seed);
         PlayerPrefs.Save();
-    }
-
-    private void StartGame()
-    {
-        SavePrefs();
-
-        SceneManager.LoadScene(1);
-    }
-
-    private void OpenHighScores()
-    {
-        print("Highscores");
-    }
-
-    private void Quit()
-    {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
     }
 }
