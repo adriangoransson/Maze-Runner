@@ -120,16 +120,16 @@ public class GameController : MonoBehaviour
     private void InstantiateMaze()
     {
         MazeGenerator mg = new MazeGenerator();
-        int[,] maze = mg.GenerateMaze(size, seed);
+        bool[,] maze = mg.GenerateMaze(size, seed);
 
         for (int row = 0; row < maze.GetLength(0); row++) {
-            int x = row;
+            int x = row - size / 2;
 
             for (int column = 0; column < maze.GetLength(1); column++) {
-                int z = column;
+                int z = column - size / 2;
 
-                if (maze[row, column] == 1) {
-                    Vector3 pos = new Vector3(x - (size / 2), Wall.transform.position.y, z - (size / 2));
+                if (maze[row, column]) {
+                    Vector3 pos = new Vector3(x, Wall.transform.position.y, z);
                     Instantiate(Wall, pos, Quaternion.identity);
                 }
             }
