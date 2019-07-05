@@ -230,6 +230,7 @@ MonoBehaviour:
   speed: 500
   inAirSpeed: 200
   jumpSpeed: 1000
+  followCamera: {fileID: 963194225}
 --- !u!54 &16190434
 Rigidbody:
   m_ObjectHideFlags: 0

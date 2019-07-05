@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public float inAirSpeed;
     public float jumpSpeed;
+    public GameObject followCamera;
 
     private bool hasStarted = false;
 
@@ -45,6 +46,10 @@ public class PlayerController : MonoBehaviour
 
         Rigidbody body = GetComponent<Rigidbody>();
         Vector3 movement = new Vector3(moveH, 0, moveV);
+
+        movement = followCamera.transform.TransformDirection(movement);
+        movement.y = 0;
+
         Vector3 jump = new Vector3(0, 0, 0);
 
         if (inAir) {
