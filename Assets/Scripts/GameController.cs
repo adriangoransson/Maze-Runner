@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour
     public GameObject boundary;
     public GameObject timer;
     public GameObject menu;
-    public Button menuButton;
+    public GameObject menuButton;
 
     public GameObject beforeStartText;
     public GameObject gameOverText;
@@ -45,13 +45,16 @@ public class GameController : MonoBehaviour
         gameOverText.SetActive(false);
         winText.SetActive(false);
         menu.SetActive(false);
-
-        menuButton.onClick.AddListener(TogglePause);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!gameHasBegun || gameIsOver || gameIsWon) {
+            menuButton.SetActive(false);
+        }
+
+
         if (!gameHasBegun) {
             if (Input.GetKeyDown(KeyCode.Space)) {
                 gameHasBegun = true;
@@ -59,6 +62,7 @@ public class GameController : MonoBehaviour
                 Time.timeScale = 1;
             }
         } else if (gameIsOver || gameIsWon) {
+
             Time.timeScale = 0;
 
             if (gameIsOver) {
@@ -75,15 +79,12 @@ public class GameController : MonoBehaviour
             }
         } else if (Input.GetKeyDown(KeyCode.Escape)) {
             TogglePause();
+        } else {
+            menuButton.SetActive(true);
+
+            time += Time.deltaTime;
+            timerText.text = SecondsToString((int)time);
         }
-
-        if (gameIsPaused) {
-            return;
-        }
-
-
-        time += Time.deltaTime;
-        timerText.text = SecondsToString((int)time);
     }
 
     public void TogglePause()

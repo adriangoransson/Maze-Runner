@@ -1513,7 +1513,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1020788360}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1696122062}
+        m_MethodName: TogglePause
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1020788360
@@ -2280,7 +2291,7 @@ MonoBehaviour:
   boundary: {fileID: 2062250019}
   timer: {fileID: 992615837}
   menu: {fileID: 1951369297}
-  menuButton: {fileID: 1020788359}
+  menuButton: {fileID: 1020788357}
   beforeStartText: {fileID: 1008323988}
   gameOverText: {fileID: 111250789}
   winText: {fileID: 939899111}
