@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     public GameObject menu;
     public Button menuButton;
 
+    public GameObject beforeStartText;
     public GameObject gameOverText;
     public GameObject winText;
 
@@ -20,6 +21,7 @@ public class GameController : MonoBehaviour
 
     private float time;
     private Text timerText;
+    private bool gameHasBegun;
     private bool gameIsPaused;
     private bool gameIsOver;
     private bool gameIsWon;
@@ -37,10 +39,9 @@ public class GameController : MonoBehaviour
         time = 0;
         timerText = timer.GetComponent<Text>();
 
-        gameIsPaused = false;
-        gameIsOver = false;
-        gameIsWon = false;
+        Time.timeScale = 0;
 
+        beforeStartText.SetActive(true);
         gameOverText.SetActive(false);
         winText.SetActive(false);
         menu.SetActive(false);
@@ -51,7 +52,13 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameIsOver || gameIsWon) {
+        if (!gameHasBegun) {
+            if (Input.GetKeyDown(KeyCode.Space)) {
+                gameHasBegun = true;
+                beforeStartText.SetActive(false);
+                Time.timeScale = 1;
+            }
+        } else if (gameIsOver || gameIsWon) {
             Time.timeScale = 0;
 
             if (gameIsOver) {
