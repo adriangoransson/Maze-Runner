@@ -26,12 +26,6 @@ public class PlayerController : MonoBehaviour
         jumpSound = audioSources[1];
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     void FixedUpdate()
     {
         if (!hasStarted) {

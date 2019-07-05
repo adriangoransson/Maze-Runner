@@ -227,8 +227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b68bd6a8cd247b4a6d798c9e076b59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 500
-  inAirSpeed: 200
+  speed: 650
+  inAirSpeed: 250
   jumpSpeed: 1000
   followCamera: {fileID: 963194225}
 --- !u!54 &16190434
