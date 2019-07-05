@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour
     public GameObject beforeStartText;
     public GameObject gameOverText;
     public GameObject winText;
+    public GameObject newHighscoreText;
+    public GameObject bestScoreText;
 
     private int size;
     private int seed;
@@ -45,46 +47,43 @@ public class GameController : MonoBehaviour
         gameOverText.SetActive(false);
         winText.SetActive(false);
         menu.SetActive(false);
+        menuButton.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!gameHasBegun || gameIsOver || gameIsWon) {
-            menuButton.SetActive(false);
-        }
-
-
         if (!gameHasBegun) {
             if (Input.GetKeyDown(KeyCode.Space)) {
                 gameHasBegun = true;
                 beforeStartText.SetActive(false);
                 Time.timeScale = 1;
             }
-        } else if (gameIsOver || gameIsWon) {
 
-            Time.timeScale = 0;
+            return;
+        }
 
-            if (gameIsOver) {
-                gameOverText.SetActive(true);
-            } else {
-                winText.SetActive(true);
-            }
-
+        if (gameIsOver || gameIsWon) {
             if (Input.GetKeyDown(KeyCode.R)) {
                 Scene scene = SceneManager.GetActiveScene();
                 SceneManager.LoadScene(scene.name);
             } else if (Input.GetKeyDown(KeyCode.Escape)) {
                 SceneManager.LoadScene(0);
             }
-        } else if (Input.GetKeyDown(KeyCode.Escape)) {
-            TogglePause();
-        } else {
-            menuButton.SetActive(true);
 
-            time += Time.deltaTime;
-            timerText.text = SecondsToString((int)time);
+            return;
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            TogglePause();
+
+            return;
+        }
+
+        menuButton.SetActive(true);
+
+        time += Time.deltaTime;
+        timerText.text = SecondsToString((int)time);
     }
 
     public void TogglePause()
@@ -110,6 +109,12 @@ public class GameController : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    void EndGame()
+    {
+        menuButton.SetActive(false);
+        Time.timeScale = 0;
+    }
+
     public void AddPenalty()
     {
         time += 5;
@@ -117,12 +122,35 @@ public class GameController : MonoBehaviour
 
     public void WinGame()
     {
+        HighscoreDataManager hsm = new HighscoreDataManager();
+
+        string level = size + "." + seed;
+
+        Highscore hs = hsm.GetScoreForLevel(level);
+        int bestTime = (int)time;
+
+        if (hs != null) {
+            bestTime = Mathf.Min(hs.Seconds, bestTime);
+        }
+
+        if (hs == null || hs.Seconds > time) {
+            hsm.Save(level, (int)time);
+            newHighscoreText.SetActive(true);
+        }
+
+        bestScoreText.GetComponent<Text>().text += " " + SecondsToString(bestTime);
+
+        bestScoreText.SetActive(true);
+        winText.SetActive(true);
         gameIsWon = true;
+        EndGame();
     }
 
     public void GameOver()
     {
+        gameOverText.SetActive(true);
         gameIsOver = true;
+        EndGame();
     }
 
     private void InstantiateMaze()

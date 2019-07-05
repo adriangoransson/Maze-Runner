@@ -7,8 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class HighscoreController : MonoBehaviour
 {
-    public static string HIGHSCORE_FILENAME = "highscores.dat";
-
     public GameObject highscoreList;
     public GameObject levelSelector;
     public GameObject noHighScores;
@@ -18,10 +16,10 @@ public class HighscoreController : MonoBehaviour
 
     private void Awake()
     {
-        filePath = Path.Combine(Application.persistentDataPath, HIGHSCORE_FILENAME);
         listController = highscoreList.GetComponent<HighscoreListController>();
 
-        if (File.Exists(filePath)) {
+        HighscoreDataManager hsm = new HighscoreDataManager();
+        if (hsm.HighscoresExist()) {
             levelSelector.SetActive(true);
         } else {
             noHighScores.SetActive(true);
