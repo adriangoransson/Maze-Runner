@@ -1,26 +1,27 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class HighscoreController : MonoBehaviour
 {
-    public GameObject highscoreList;
+    public GameObject bestScoreText;
     public GameObject levelSelector;
     public GameObject noHighScores;
 
-    private HighscoreListController listController;
-    private string filePath;
+    private List<Highscore> highscores;
 
     private void Awake()
     {
-        listController = highscoreList.GetComponent<HighscoreListController>();
-
         HighscoreDataManager hsm = new HighscoreDataManager();
         if (hsm.HighscoresExist()) {
             levelSelector.SetActive(true);
+            highscores = hsm.LoadAll();
+            PopulateLevelSelector();
+            SetLevel(0);
         } else {
             noHighScores.SetActive(true);
         }
@@ -31,10 +32,16 @@ public class HighscoreController : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    public void ChangeLevel(int level)
+    public void SetLevel(int level)
     {
-        listController.SetLevel(level.ToString());
-        listController.Load();
-        highscoreList.SetActive(true);
+        Highscore hs = highscores[level];
+        bestScoreText.GetComponent<Text>().text = "Score: " + Utils.SecondsToString(hs.Seconds) + " seconds\nDate: " + hs.Date;
+        bestScoreText.SetActive(true);
+    }
+
+    private void PopulateLevelSelector()
+    {
+        Dropdown level = levelSelector.transform.GetChild(1).GetComponent<Dropdown>();
+        level.AddOptions(highscores.Select((hs) => hs.Level).ToList());
     }
 }

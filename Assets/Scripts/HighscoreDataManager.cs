@@ -59,7 +59,7 @@ public class HighscoreDataManager
         }
     }
 
-    private List<Highscore> LoadAll()
+    public List<Highscore> LoadAll()
     {
         if (!HighscoresExist()) {
             return new List<Highscore>();
