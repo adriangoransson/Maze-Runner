@@ -1,4 +1,4 @@
-﻿public class Utils
+﻿public static class Utils
 {
     /// <summary>
     /// Format seconds as mm:ss.
