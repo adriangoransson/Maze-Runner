@@ -12,6 +12,8 @@ public class MainMenuController : MonoBehaviour
     private const int MEDIUM = 40;
     private const int HARD = 60;
 
+    public int maxSize = 1000;
+    public int minSize = 5;
     public InputField levelInput;
 
     private int size;
@@ -50,6 +52,10 @@ public class MainMenuController : MonoBehaviour
 
     public void StartGame()
     {
+        if (levelInput.text.Equals("")) {
+            return;
+        }
+
         SavePrefs();
 
         SceneManager.LoadScene(1);
@@ -80,6 +86,9 @@ public class MainMenuController : MonoBehaviour
         try {
             size = Convert.ToInt32(args[0]);
 
+            if (size < minSize || size > maxSize) {
+                size = MEDIUM;
+            }
         } catch (Exception) {
             size = MEDIUM;
         }
@@ -94,6 +103,8 @@ public class MainMenuController : MonoBehaviour
         } catch (Exception) {
             seed = GetNewSeed();
         }
+
+        UpdateTextField();
     }
 
     private void SetSize(int newSize)
