@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/*
+ * Bounds for maze to check player win condition.
+ */
 public class BoundsChecker : MonoBehaviour
 {
     private GameController controller;

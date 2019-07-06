@@ -1,5 +1,10 @@
 ﻿using UnityEngine;
 
+/*
+ * Player controller. Listens for control input and applies force to body.
+ * Movement direction is relative to camera direction.
+ * Plays sounds on collisions and jumps.
+ */
 public class PlayerController : MonoBehaviour
 {
     public float speed;
@@ -7,18 +12,18 @@ public class PlayerController : MonoBehaviour
     public float jumpSpeed;
     public GameObject followCamera;
 
-    private bool hasStarted = false;
+    private bool hasStarted;
 
     private GameController controller;
     private AudioSource bumpSound;
     private AudioSource jumpSound;
     private bool inAir;
 
-    // Start is called before the first frame update
     void Start()
     {
         GameObject go = GameObject.FindGameObjectWithTag("GameController");
         controller = go.GetComponent<GameController>();
+
         AudioSource[] audioSources = GetComponents<AudioSource>();
         bumpSound = audioSources[0];
         jumpSound = audioSources[1];
@@ -42,7 +47,7 @@ public class PlayerController : MonoBehaviour
         movement = followCamera.transform.TransformDirection(movement);
         movement.y = 0;
 
-        Vector3 jump = new Vector3(0, 0, 0);
+        Vector3 jump = Vector3.zero;
 
         if (inAir) {
             factor = inAirSpeed;

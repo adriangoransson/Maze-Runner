@@ -3,6 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+/*
+ * Main menu controller. Method calls from buttons connected in Unity.
+ */
 public class MainMenuController : MonoBehaviour
 {
     public const string SIZE_KEY = "SIZE_KEY";
@@ -21,6 +24,7 @@ public class MainMenuController : MonoBehaviour
 
     void Start()
     {
+        // Set this listener up in code since we already have the reference.
         levelInput.onValueChanged.AddListener(InputChanged);
 
         size = PlayerPrefs.GetInt(SIZE_KEY, MEDIUM);

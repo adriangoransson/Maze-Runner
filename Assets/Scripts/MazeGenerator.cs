@@ -1,8 +1,18 @@
 ﻿using System;
 
+/*
+ * A maze generator. Slightly modified logic from https://www.raywenderlich.com/82-procedural-generation-of-mazes-with-unity.
+ */
 public class MazeGenerator
 {
-    // Slightly modified logic from https://www.raywenderlich.com/82-procedural-generation-of-mazes-with-unity
+    /// <summary>
+    /// Create a maze of <c>size</c> with <c>seed</c>. Create an empty room at <c>emptyPosition</c> of <c>emptySize</c>.
+    /// </summary>
+    /// <param name="size">Side length.</param>
+    /// <param name="seed">Randomizer seed.</param>
+    /// <param name="emptyPosition">Position of empty room.</param>
+    /// <param name="emptySize">Empty room size.</param>
+    /// <returns>Boolean matrix where [row, col] is true if there is a wall.</returns>
     public bool[,] GenerateMaze(int size, int seed, int emptyPosition, int emptySize)
     {
         Random rand = new Random(seed);
@@ -63,7 +73,12 @@ public class MazeGenerator
         return maze;
     }
 
-    // Create a maze of `size` with `seed`. Create an empty room in the middle that is 3*3 blocks.
+    /// <summary>
+    /// Create a maze of <c>size</c> with <c>seed</c>. Create an empty room in the middle that is 3*3 blocks.
+    /// </summary>
+    /// <param name="size">Side length.</param>
+    /// <param name="seed">Randomizer seed.</param>
+    /// <returns>Boolean matrix where [row, col] is true if there is a wall.</returns>
     public bool[,] GenerateMaze(int size, int seed)
     {
         return GenerateMaze(size, seed, size / 2, 3);

@@ -2,6 +2,9 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/*
+ * Main game controller. Responsible for creating the game world and checking win conditions.
+ */
 public class GameController : MonoBehaviour
 {
     public GameObject Wall;
@@ -26,7 +29,6 @@ public class GameController : MonoBehaviour
     private bool gameIsOver;
     private bool gameIsWon;
 
-    // Start is called before the first frame update
     void Start()
     {
         Resume();
@@ -39,6 +41,7 @@ public class GameController : MonoBehaviour
         time = 0;
         timerText = timer.GetComponent<Text>();
 
+        // Game is initially paused.
         Time.timeScale = 0;
 
         beforeStartText.SetActive(true);
@@ -48,40 +51,33 @@ public class GameController : MonoBehaviour
         menuButton.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!gameHasBegun) {
+            // Wait for player to press space before starting.
             if (Input.GetKeyDown(KeyCode.Space)) {
                 gameHasBegun = true;
                 beforeStartText.SetActive(false);
                 Time.timeScale = 1;
             }
-
-            return;
-        }
-
-        if (gameIsOver || gameIsWon) {
+        } else if (gameIsOver || gameIsWon) {
+            // Press R to restart or Esc for main menu.
             if (Input.GetKeyDown(KeyCode.R)) {
                 Scene scene = SceneManager.GetActiveScene();
                 SceneManager.LoadScene(scene.name);
             } else if (Input.GetKeyDown(KeyCode.Escape)) {
                 SceneManager.LoadScene(0);
             }
-
-            return;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        } else if (Input.GetKeyDown(KeyCode.Escape)) {
             TogglePause();
+        } else {
+            // Ordinary game loop.
+            menuButton.SetActive(true);
 
-            return;
+            time += Time.deltaTime;
+            timerText.text = Utils.SecondsToString((int)time);
         }
 
-        menuButton.SetActive(true);
-
-        time += Time.deltaTime;
-        timerText.text = Utils.SecondsToString((int)time);
     }
 
     public void TogglePause()
@@ -107,8 +103,12 @@ public class GameController : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    /*
+     * Win or game over state.
+     */
     void EndGame()
     {
+        // There is text on screen so menu is unavailable.
         menuButton.SetActive(false);
         Time.timeScale = 0;
     }
@@ -151,6 +151,9 @@ public class GameController : MonoBehaviour
         EndGame();
     }
 
+    /*
+     * Instantiate wall prefabs according to matrix from MazeGenerator.
+     */
     private void InstantiateMaze()
     {
         MazeGenerator mg = new MazeGenerator();
@@ -170,6 +173,9 @@ public class GameController : MonoBehaviour
         }
     }
 
+    /*
+     * Set size for the bounds checker to match the maze.
+     */
     private void SetBounds()
     {
         BoxCollider b = boundary.GetComponent<BoxCollider>();

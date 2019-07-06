@@ -1,10 +1,13 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
-using UnityEngine;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
 
+/*
+ * Abstraction layer over data file on the file system.
+ */
 public class HighscoreDataManager
 {
     private const string FILENAME = "highscore.dat";
@@ -16,11 +19,19 @@ public class HighscoreDataManager
         filePath = Path.Combine(Application.persistentDataPath, FILENAME);
     }
 
+    /// <summary>
+    /// True if any previous highscores exist
+    /// </summary>
     public bool HighscoresExist()
     {
         return File.Exists(filePath);
     }
 
+    /// <summary>
+    /// Save highscore. Will overwrite previous if it exists.
+    /// </summary>
+    /// <param name="level">Level identifier (<c>size.seed</c>).</param>
+    /// <param name="seconds">Highscore time</param>
     public void Save(string level, int seconds)
     {
         Highscore highscore = new Highscore(level, seconds);
@@ -41,15 +52,11 @@ public class HighscoreDataManager
         file.Close();
     }
 
-    public List<Highscore> GetLevels()
-    {
-        if (!HighscoresExist()) {
-            return new List<Highscore>();
-        }
-
-        return new List<Highscore>();
-    }
-
+    /// <summary>
+    /// Get the highscore for <c>level</c>.
+    /// </summary>
+    /// <param name="level">Level identifier (<c>size.seed</c>).</param>
+    /// <returns>Highscore or null.</returns>
     public Highscore GetScoreForLevel(string level)
     {
         try {
@@ -59,6 +66,10 @@ public class HighscoreDataManager
         }
     }
 
+    /// <summary>
+    /// Load all highscores
+    /// </summary>
+    /// <returns>List of highscores.</returns>
     public List<Highscore> LoadAll()
     {
         if (!HighscoresExist()) {

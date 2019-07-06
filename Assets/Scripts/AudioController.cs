@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+/*
+ * Controller for Audio UI prefab.
+ */
 public class AudioController : MonoBehaviour
 {
     private const string AUDIO_KEY = "AUDIO_KEY";

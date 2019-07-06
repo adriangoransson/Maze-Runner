@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/*
+ * Controller to show level highscores. Fetches the list of levels and allows the user to browse.
+ */
 public class HighscoreController : MonoBehaviour
 {
     public GameObject bestScoreText;
@@ -15,7 +18,7 @@ public class HighscoreController : MonoBehaviour
     private List<Highscore> highscores;
     private Highscore selectedHighscore;
 
-    private void Awake()
+    private void Start()
     {
         HighscoreDataManager hsm = new HighscoreDataManager();
         if (hsm.HighscoresExist()) {
@@ -56,6 +59,8 @@ public class HighscoreController : MonoBehaviour
     private void PopulateLevelSelector()
     {
         Dropdown level = levelSelector.transform.GetChild(1).GetComponent<Dropdown>();
+
+        // Map over highscores and select only the level names.
         level.AddOptions(highscores.Select((hs) => hs.Level).ToList());
     }
 }

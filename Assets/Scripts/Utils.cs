@@ -1,5 +1,9 @@
 ﻿public class Utils
 {
+    /// <summary>
+    /// Format seconds as mm:ss.
+    /// </summary>
+    /// <returns>Seconds formatted as mm:ss.</returns>
     public static string SecondsToString(int seconds)
     {
         int minutes = seconds / 60;
