@@ -7,6 +7,8 @@ using UnityEngine.UI;
  */
 public class GameController : MonoBehaviour
 {
+    public int timePenalty = 5;
+
     public GameObject Wall;
     public GameObject boundary;
     public GameObject timer;
@@ -115,7 +117,7 @@ public class GameController : MonoBehaviour
 
     public void AddPenalty()
     {
-        time += 5;
+        time += timePenalty;
     }
 
     public void WinGame()
