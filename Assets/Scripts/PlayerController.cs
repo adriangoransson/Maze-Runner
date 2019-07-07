@@ -11,22 +11,17 @@ public class PlayerController : MonoBehaviour
     public float inAirSpeed;
     public float jumpSpeed;
     public GameObject followCamera;
-
-    private bool hasStarted;
+    public AudioSource bumpSound;
+    public AudioSource jumpSound;
 
     private GameController controller;
-    private AudioSource bumpSound;
-    private AudioSource jumpSound;
+    private bool hasStarted;
     private bool inAir;
 
     void Start()
     {
         GameObject go = GameObject.FindGameObjectWithTag("GameController");
         controller = go.GetComponent<GameController>();
-
-        AudioSource[] audioSources = GetComponents<AudioSource>();
-        bumpSound = audioSources[0];
-        jumpSound = audioSources[1];
     }
 
     void FixedUpdate()
