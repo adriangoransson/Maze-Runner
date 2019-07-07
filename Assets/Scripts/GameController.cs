@@ -13,13 +13,13 @@ public class GameController : MonoBehaviour
     public GameObject menu;
     public GameObject menuButton;
     public Text timerText;
+    public Text bestScoreText;
     public BoxCollider boundary;
 
     public GameObject beforeStartText;
     public GameObject gameOverText;
     public GameObject winText;
     public GameObject newHighscoreText;
-    public GameObject bestScoreText;
 
     private int size;
     private int seed;
@@ -136,9 +136,9 @@ public class GameController : MonoBehaviour
             newHighscoreText.SetActive(true);
         }
 
-        bestScoreText.GetComponent<Text>().text += " " + Utils.SecondsToString(bestTime);
+        bestScoreText.text += " " + Utils.SecondsToString(bestTime);
+        bestScoreText.gameObject.SetActive(true);
 
-        bestScoreText.SetActive(true);
         winText.SetActive(true);
         gameIsWon = true;
         EndGame();

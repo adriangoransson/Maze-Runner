@@ -2546,12 +2546,12 @@ MonoBehaviour:
   menu: {fileID: 1951369297}
   menuButton: {fileID: 1020788357}
   timerText: {fileID: 992615839}
+  bestScoreText: {fileID: 935105446}
   boundary: {fileID: 2062250020}
   beforeStartText: {fileID: 1008323988}
   gameOverText: {fileID: 111250789}
   winText: {fileID: 939899111}
   newHighscoreText: {fileID: 664044294}
-  bestScoreText: {fileID: 935105443}
 --- !u!82 &1696122063
 AudioSource:
   m_ObjectHideFlags: 0
