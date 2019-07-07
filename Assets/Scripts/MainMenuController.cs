@@ -11,12 +11,13 @@ public class MainMenuController : MonoBehaviour
     public const string SIZE_KEY = "SIZE_KEY";
     public const string SEED_KEY = "SEED_KEY";
 
-    private const int EASY = 20;
-    private const int MEDIUM = 40;
-    private const int HARD = 60;
+    public int easySize = 20;
+    public int mediumSize = 40;
+    public int hardSize = 60;
 
-    public int maxSize = 1000;
     public int minSize = 5;
+    public int maxSize = 1000;
+
     public InputField levelInput;
 
     private int size;
@@ -27,7 +28,7 @@ public class MainMenuController : MonoBehaviour
         // Set this listener up in code since we already have the reference.
         levelInput.onValueChanged.AddListener(InputChanged);
 
-        size = PlayerPrefs.GetInt(SIZE_KEY, MEDIUM);
+        size = PlayerPrefs.GetInt(SIZE_KEY, mediumSize);
         seed = PlayerPrefs.GetInt(SEED_KEY, GetNewSeed());
 
         UpdateTextField();
@@ -35,17 +36,17 @@ public class MainMenuController : MonoBehaviour
 
     public void EasySize()
     {
-        SetSize(EASY);
+        SetSize(easySize);
     }
 
     public void MediumSize()
     {
-        SetSize(MEDIUM);
+        SetSize(mediumSize);
     }
 
     public void HardSize()
     {
-        SetSize(HARD);
+        SetSize(hardSize);
     }
 
     public void NewSeed()
@@ -91,10 +92,10 @@ public class MainMenuController : MonoBehaviour
             size = Convert.ToInt32(args[0]);
 
             if (size < minSize || size > maxSize) {
-                size = MEDIUM;
+                size = mediumSize;
             }
         } catch (Exception) {
-            size = MEDIUM;
+            size = mediumSize;
         }
 
         if (args.GetLength(0) < 2) {
