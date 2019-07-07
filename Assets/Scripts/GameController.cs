@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour
 {
     public int timePenalty = 5;
 
-    public GameObject Wall;
+    public GameObject wall;
     public GameObject boundary;
     public GameObject timer;
     public GameObject menu;
@@ -168,8 +168,8 @@ public class GameController : MonoBehaviour
                 int z = column - size / 2;
 
                 if (maze[row, column]) {
-                    Vector3 pos = new Vector3(x, Wall.transform.position.y, z);
-                    Instantiate(Wall, pos, Quaternion.identity);
+                    Vector3 pos = new Vector3(x, wall.transform.position.y, z);
+                    Instantiate(wall, pos, Quaternion.identity);
                 }
             }
         }

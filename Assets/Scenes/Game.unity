@@ -2477,7 +2477,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 944c99f0efa3b455baa766c5970d87e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Wall: {fileID: 2931117690083415870, guid: 4fcc8dbbf40554781b9f267be1afc366, type: 3}
+  timePenalty: 5
+  wall: {fileID: 2931117690083415870, guid: 4fcc8dbbf40554781b9f267be1afc366, type: 3}
   boundary: {fileID: 2062250019}
   timer: {fileID: 992615837}
   menu: {fileID: 1951369297}
