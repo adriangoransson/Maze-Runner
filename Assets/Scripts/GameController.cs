@@ -10,9 +10,9 @@ public class GameController : MonoBehaviour
     public int timePenalty = 5;
 
     public GameObject wall;
-    public GameObject timer;
     public GameObject menu;
     public GameObject menuButton;
+    public Text timerText;
     public BoxCollider boundary;
 
     public GameObject beforeStartText;
@@ -25,7 +25,6 @@ public class GameController : MonoBehaviour
     private int seed;
 
     private float time;
-    private Text timerText;
     private bool gameHasBegun;
     private bool gameIsPaused;
     private bool gameIsOver;
@@ -41,7 +40,6 @@ public class GameController : MonoBehaviour
         SetBounds();
 
         time = 0;
-        timerText = timer.GetComponent<Text>();
 
         // Game is initially paused.
         Time.timeScale = 0;

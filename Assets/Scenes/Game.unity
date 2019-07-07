@@ -2543,9 +2543,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timePenalty: 5
   wall: {fileID: 2931117690083415870, guid: 4fcc8dbbf40554781b9f267be1afc366, type: 3}
-  timer: {fileID: 992615837}
   menu: {fileID: 1951369297}
   menuButton: {fileID: 1020788357}
+  timerText: {fileID: 992615839}
   boundary: {fileID: 2062250020}
   beforeStartText: {fileID: 1008323988}
   gameOverText: {fileID: 111250789}
