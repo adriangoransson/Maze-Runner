@@ -12,7 +12,7 @@ public class HighscoreDataManager
 {
     private const string FILENAME = "highscore.dat";
 
-    private string filePath;
+    private readonly string filePath;
 
     public HighscoreDataManager()
     {
