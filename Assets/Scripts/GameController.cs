@@ -10,10 +10,10 @@ public class GameController : MonoBehaviour
     public int timePenalty = 5;
 
     public GameObject wall;
-    public GameObject boundary;
     public GameObject timer;
     public GameObject menu;
     public GameObject menuButton;
+    public BoxCollider boundary;
 
     public GameObject beforeStartText;
     public GameObject gameOverText;
@@ -180,7 +180,6 @@ public class GameController : MonoBehaviour
      */
     private void SetBounds()
     {
-        BoxCollider b = boundary.GetComponent<BoxCollider>();
-        b.size = new Vector3(size, size, size);
+        boundary.size = new Vector3(size, size, size);
     }
 }
