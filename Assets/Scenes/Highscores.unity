@@ -2070,7 +2070,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1483de04b861d4f499f54117883ebe2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bestScoreText: {fileID: 477582850}
+  bestScoreText: {fileID: 477582852}
   levelSelector: {fileID: 954214474}
   noHighScores: {fileID: 1114742647}
   playButton: {fileID: 537594168}

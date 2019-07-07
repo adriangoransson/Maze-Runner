@@ -10,7 +10,7 @@ using UnityEngine.UI;
  */
 public class HighscoreController : MonoBehaviour
 {
-    public GameObject bestScoreText;
+    public Text bestScoreText;
     public GameObject levelSelector;
     public GameObject noHighScores;
     public GameObject playButton;
@@ -40,8 +40,8 @@ public class HighscoreController : MonoBehaviour
     public void SetLevel(int level)
     {
         selectedHighscore = highscores[level];
-        bestScoreText.GetComponent<Text>().text = "Score: " + Utils.SecondsToString(selectedHighscore.Seconds) + " seconds\nDate: " + selectedHighscore.Date;
-        bestScoreText.SetActive(true);
+        bestScoreText.text = "Score: " + Utils.SecondsToString(selectedHighscore.Seconds) + " seconds\nDate: " + selectedHighscore.Date;
+        bestScoreText.gameObject.SetActive(true);
     }
 
     public void PlayLevel()
