@@ -1675,9 +1675,19 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Rotate the camera with Q and E
+  m_Text: 'Press space to start
 
-    Press Space to start'
+
+    CONTROLS
+
+    WASD/arrow keys to navigate
+
+    Space to jump
+
+
+    CAMERA
+
+    Rotate with Q and E'
 --- !u!222 &1008323992
 CanvasRenderer:
   m_ObjectHideFlags: 0
