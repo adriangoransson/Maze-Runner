@@ -2022,7 +2022,7 @@ MonoBehaviour:
   smallSize: 100
   mediumSize: 200
   largeSize: 400
-  minSize: 5
+  minSize: 15
   maxSize: 1000
   levelInput: {fileID: 461755108}
 --- !u!4 &1449919304

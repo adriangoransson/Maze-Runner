@@ -46,29 +46,33 @@ public class MazeGenerator
             }
         }
 
-        double wallChance = 0.7;
+        // Generate one opening in the maze sides
+        int side = rand.Next(4);
 
-        // Randomly create openings in the outer borders
+        int openingRow = 0;
+        int openingColumn = 0;
 
-        for (int col = 0; col <= columnMax; col++) {
-            if (!maze[1, col] && rand.NextDouble() > wallChance) {
-                maze[0, col] = false;
-            }
+        while (openingRow == 0 && openingColumn == 0) { // top left corner is invalid for an opening
+            int distance = rand.Next(1, size - 1);
 
-            if (!maze[rowMax - 1, col] && rand.NextDouble() > wallChance) {
-                maze[rowMax, col] = false;
+            // Check that the opening isn't toward an interior wall
+
+            if (side == 0 && !maze[1, distance]) {
+                openingRow = 0;
+                openingColumn = distance;
+            } else if (side == 1 && !maze[rowMax - 1, distance]) {
+                openingRow = rowMax;
+                openingColumn = distance;
+            } else if (side == 2 && !maze[distance, 1]) {
+                openingRow = distance;
+                openingColumn = 0;
+            } else if (side == 3 && !maze[distance, columnMax - 1]) {
+                openingRow = distance;
+                openingColumn = columnMax;
             }
         }
 
-        for (int row = 0; row <= rowMax; row++) {
-            if (!maze[row, 1] && rand.NextDouble() > wallChance) {
-                maze[row, 0] = false;
-            }
-
-            if (!maze[row, columnMax - 1] && rand.NextDouble() > wallChance) {
-                maze[row, columnMax] = false;
-            }
-        }
+        maze[openingRow, openingColumn] = false;
 
         return maze;
     }
