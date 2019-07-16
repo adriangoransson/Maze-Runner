@@ -733,7 +733,7 @@ RectTransform:
   m_Children:
   - {fileID: 839257953}
   m_Father: {fileID: 384625389}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -946,6 +946,7 @@ RectTransform:
   - {fileID: 364206545}
   - {fileID: 461755107}
   - {fileID: 865530504}
+  - {fileID: 570341034}
   - {fileID: 1165491829}
   - {fileID: 571384057}
   - {fileID: 382405223}
@@ -1260,6 +1261,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 535897002}
   m_CullTransparentMesh: 0
+--- !u!1 &570341033
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 570341034}
+  - component: {fileID: 570341036}
+  - component: {fileID: 570341035}
+  m_Layer: 5
+  m_Name: Layout help
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &570341034
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570341033}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 384625389}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -60}
+  m_SizeDelta: {x: 300, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &570341035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570341033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.8679245, g: 0.8679245, b: 0.8679245, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 25
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 40
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: The unique layout value controls the maze generation
+--- !u!222 &570341036
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570341033}
+  m_CullTransparentMesh: 0
 --- !u!224 &571384057 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7414857437282927532, guid: f9ad08dc3de6c45e7b9b2d38671cc98b,
@@ -1299,7 +1379,7 @@ RectTransform:
   m_Children:
   - {fileID: 132456613}
   m_Father: {fileID: 384625389}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1736,11 +1816,11 @@ RectTransform:
   m_Children:
   - {fileID: 264043936}
   m_Father: {fileID: 384625389}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -115}
+  m_AnchoredPosition: {x: 0, y: -130}
   m_SizeDelta: {x: 260, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1165491830
@@ -2116,7 +2196,7 @@ GameObject:
   - component: {fileID: 1565075007}
   - component: {fileID: 1565075006}
   m_Layer: 5
-  m_Name: Size
+  m_Name: Maze area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2174,7 +2254,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Maze area
+  m_Text: Maze area (blocks)
 --- !u!222 &1565075007
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2543,7 +2623,7 @@ PrefabInstance:
     - target: {fileID: 7414857437282927532, guid: f9ad08dc3de6c45e7b9b2d38671cc98b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7414857437282927532, guid: f9ad08dc3de6c45e7b9b2d38671cc98b,
         type: 3}
@@ -2568,7 +2648,7 @@ PrefabInstance:
     - target: {fileID: 7414857437282927532, guid: f9ad08dc3de6c45e7b9b2d38671cc98b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -238.1
+      value: -230
       objectReference: {fileID: 0}
     - target: {fileID: 7414857437282927532, guid: f9ad08dc3de6c45e7b9b2d38671cc98b,
         type: 3}
