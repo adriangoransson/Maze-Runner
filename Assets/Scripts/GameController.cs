@@ -157,7 +157,7 @@ public class GameController : MonoBehaviour
     private void InstantiateMaze()
     {
         MazeGenerator mg = new MazeGenerator();
-        bool[,] maze = mg.GenerateMaze(size, seed);
+        MazeGenerator.MazeObject[,] maze = mg.GenerateMaze(size, seed);
 
         for (int row = 0; row < maze.GetLength(0); row++) {
             int x = row - size / 2;
@@ -165,9 +165,11 @@ public class GameController : MonoBehaviour
             for (int column = 0; column < maze.GetLength(1); column++) {
                 int z = column - size / 2;
 
-                if (maze[row, column]) {
-                    Vector3 pos = new Vector3(x, wall.transform.position.y, z);
-                    Instantiate(wall, pos, Quaternion.identity);
+                switch (maze[row, column]) {
+                    case MazeGenerator.MazeObject.Wall:
+                        Vector3 pos = new Vector3(x, wall.transform.position.y, z);
+                        Instantiate(wall, pos, Quaternion.identity);
+                        break;
                 }
             }
         }
