@@ -11,9 +11,9 @@ public class MainMenuController : MonoBehaviour
     public const string SIZE_KEY = "SIZE_KEY";
     public const string SEED_KEY = "SEED_KEY";
 
-    public int easySize = 20;
+    public int smallSize = 20;
     public int mediumSize = 40;
-    public int hardSize = 60;
+    public int largeSize = 60;
 
     public int minSize = 5;
     public int maxSize = 1000;
@@ -34,9 +34,9 @@ public class MainMenuController : MonoBehaviour
         UpdateTextField();
     }
 
-    public void EasySize()
+    public void SmallSize()
     {
-        SetSize(easySize);
+        SetSize(smallSize);
     }
 
     public void MediumSize()
@@ -44,9 +44,9 @@ public class MainMenuController : MonoBehaviour
         SetSize(mediumSize);
     }
 
-    public void HardSize()
+    public void LargeSize()
     {
-        SetSize(hardSize);
+        SetSize(largeSize);
     }
 
     public void NewSeed()
