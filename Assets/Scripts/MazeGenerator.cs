@@ -9,6 +9,7 @@ public class MazeGenerator
     {
         Ground,
         Wall,
+        Bomb,
     }
 
     /// <summary>
@@ -48,6 +49,8 @@ public class MazeGenerator
                         int b = a != 0 ? 0 : (rand.NextDouble() < .5 ? -1 : 1);
                         maze[row + a, col + b] = MazeObject.Wall;
                     }
+                } else if (rand.NextDouble() < .1) {
+                    maze[row, col] = MazeObject.Bomb;
                 }
             }
         }

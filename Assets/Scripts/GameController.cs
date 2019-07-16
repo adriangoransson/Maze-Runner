@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
 {
     public int timePenalty = 5;
 
+    public GameObject bomb;
     public GameObject wall;
     public GameObject menu;
     public GameObject menuButton;
@@ -165,10 +166,15 @@ public class GameController : MonoBehaviour
             for (int column = 0; column < maze.GetLength(1); column++) {
                 int z = column - size / 2;
 
+                Vector3 pos;
                 switch (maze[row, column]) {
                     case MazeGenerator.MazeObject.Wall:
-                        Vector3 pos = new Vector3(x, wall.transform.position.y, z);
+                        pos = new Vector3(x, wall.transform.position.y, z);
                         Instantiate(wall, pos, Quaternion.identity);
+                        break;
+                    case MazeGenerator.MazeObject.Bomb:
+                        pos = new Vector3(x, bomb.transform.position.y, z);
+                        Instantiate(bomb, pos, bomb.transform.rotation);
                         break;
                 }
             }
