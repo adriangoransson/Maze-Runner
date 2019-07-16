@@ -5,6 +5,13 @@
  */
 public class MazeGenerator
 {
+    private int size;
+    private float bombChance;
+    private int emptyPosition;
+    private int emptySize;
+    private Random rand;
+    private float placementThreshold = .4f;
+
     public enum MazeObject
     {
         Ground,
@@ -12,20 +19,42 @@ public class MazeGenerator
         Bomb,
     }
 
-    /// <summary>
-    /// Create a maze of <c>size</c> with <c>seed</c>. Create an empty room at <c>emptyPosition</c> of <c>emptySize</c>.
-    /// </summary>
-    /// <param name="size">Side length.</param>
-    /// <param name="seed">Randomizer seed.</param>
-    /// <param name="emptyPosition">Position of empty room.</param>
-    /// <param name="emptySize">Empty room size.</param>
-    /// <returns>Matrix where [row, col] points to a MazeObject.</returns>
-    public MazeObject[,] GenerateMaze(int size, int seed, int emptyPosition, int emptySize)
+    public MazeGenerator Size(int size)
     {
-        Random rand = new Random(seed);
+        this.size = size;
+        return this;
+    }
 
-        float placementThreshold = .4f;
+    public MazeGenerator Seed(int seed)
+    {
+        rand = new Random(seed);
+        return this;
+    }
 
+    public MazeGenerator BombChance(float chance)
+    {
+        bombChance = chance;
+        return this;
+    }
+
+    /// <summary>
+    /// Set dimensions for an empty room.
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <returns></returns>
+    public MazeGenerator EmptyRoom(int pos, int size)
+    {
+        emptyPosition = pos;
+        emptySize = size;
+        return this;
+    }
+
+    /// <summary>
+    /// Build a maze with previously passed parameters.
+    /// </summary>
+    /// <returns>Matrix where [row, col] points to a MazeObject.</returns>
+    public MazeObject[,] Build()
+    {
         MazeObject[,] maze = new MazeObject[size, size];
 
         int rowMax = maze.GetUpperBound(0);
@@ -49,7 +78,7 @@ public class MazeGenerator
                         int b = a != 0 ? 0 : (rand.NextDouble() < .5 ? -1 : 1);
                         maze[row + a, col + b] = MazeObject.Wall;
                     }
-                } else if (rand.NextDouble() < .1) {
+                } else if (rand.NextDouble() < bombChance) {
                     maze[row, col] = MazeObject.Bomb;
                 }
             }
@@ -81,19 +110,8 @@ public class MazeGenerator
             }
         }
 
-        maze[openingRow, openingColumn] = 0;
+        maze[openingRow, openingColumn] = MazeObject.Ground;
 
         return maze;
-    }
-
-    /// <summary>
-    /// Create a maze of <c>size</c> with <c>seed</c>. Create an empty room in the middle that is 3*3 blocks.
-    /// </summary>
-    /// <param name="size">Side length.</param>
-    /// <param name="seed">Randomizer seed.</param>
-    /// <returns>Boolean matrix where [row, col] is true if there is a wall.</returns>
-    public MazeObject[,] GenerateMaze(int size, int seed)
-    {
-        return GenerateMaze(size, seed, size / 2, 3);
     }
 }

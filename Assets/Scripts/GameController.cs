@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     public int timePenalty = 5;
 
     public GameObject bomb;
+    public float bombChance;
     public GameObject wall;
     public GameObject menu;
     public GameObject menuButton;
@@ -158,7 +159,13 @@ public class GameController : MonoBehaviour
     private void InstantiateMaze()
     {
         MazeGenerator mg = new MazeGenerator();
-        MazeGenerator.MazeObject[,] maze = mg.GenerateMaze(size, seed);
+
+        MazeGenerator.MazeObject[,] maze = mg
+            .Size(size)
+            .Seed(seed)
+            .EmptyRoom(size / 2, 3)
+            .BombChance(bombChance)
+            .Build();
 
         for (int row = 0; row < maze.GetLength(0); row++) {
             int x = row - size / 2;
