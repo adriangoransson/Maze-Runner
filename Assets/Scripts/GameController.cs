@@ -7,7 +7,8 @@ using UnityEngine.UI;
  */
 public class GameController : MonoBehaviour
 {
-    public int timePenalty = 5;
+    public int timePenaltyOnCollision = 5;
+    public int timeDecreaseOnBonus = 10;
 
     public GameObject bomb;
     [Range(0, 1)]
@@ -16,6 +17,10 @@ public class GameController : MonoBehaviour
     public GameObject fire;
     [Range(0, 1)]
     public float fireChance;
+
+    public GameObject clock;
+    [Range(0, 1)]
+    public float clockChance;
 
     public GameObject[] walls;
 
@@ -124,7 +129,12 @@ public class GameController : MonoBehaviour
 
     public void AddPenalty()
     {
-        time += timePenalty;
+        time += timePenaltyOnCollision;
+    }
+
+    public void DecreaseTime()
+    {
+        time -= timeDecreaseOnBonus;
     }
 
     public void WinGame()
@@ -173,6 +183,7 @@ public class GameController : MonoBehaviour
             .EmptyRoom(size / 2, 3)
             .BombChance(bombChance)
             .FireChance(fireChance)
+            .ClockChance(clockChance)
             .Build();
 
         System.Random rand = new System.Random(seed);
@@ -196,6 +207,10 @@ public class GameController : MonoBehaviour
                     case MazeGenerator.MazeObject.Fire:
                         pos = new Vector3(x, fire.transform.position.y, z);
                         Instantiate(fire, pos, Quaternion.identity);
+                        break;
+                    case MazeGenerator.MazeObject.Clock:
+                        pos = new Vector3(x, clock.transform.position.y, z);
+                        Instantiate(clock, pos, Quaternion.identity);
                         break;
                 }
             }

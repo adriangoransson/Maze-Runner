@@ -9,11 +9,13 @@ public class MazeGenerator
 
     private float bombChance;
     private float fireChance;
+    private float clockChance;
 
     private int emptyPosition;
     private int emptySize;
     private Random rand;
-    private float placementThreshold = .4f;
+
+    private readonly float placementThreshold = .4f;
 
     public enum MazeObject
     {
@@ -21,6 +23,7 @@ public class MazeGenerator
         Wall,
         Bomb,
         Fire,
+        Clock,
     }
 
     public MazeGenerator Size(int size)
@@ -44,6 +47,12 @@ public class MazeGenerator
     public MazeGenerator FireChance(float chance)
     {
         fireChance = chance;
+        return this;
+    }
+
+    public MazeGenerator ClockChance(float chance)
+    {
+        clockChance = chance;
         return this;
     }
 
@@ -92,6 +101,8 @@ public class MazeGenerator
                     maze[row, col] = MazeObject.Bomb;
                 } else if (rand.NextDouble() < fireChance) {
                     maze[row, col] = MazeObject.Fire;
+                } else if (rand.NextDouble() < clockChance) {
+                    maze[row, col] = MazeObject.Clock;
                 }
             }
         }

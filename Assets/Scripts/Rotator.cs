@@ -2,6 +2,8 @@
 
 public class Rotator : MonoBehaviour
 {
+    public float speedMultiplier = 1;
+
     private Vector3 rotate;
 
     private void Start()
@@ -11,6 +13,6 @@ public class Rotator : MonoBehaviour
 
     void Update()
     {
-        transform.Rotate(rotate * Time.deltaTime, Space.World);
+        transform.Rotate(rotate * Time.deltaTime * speedMultiplier, Space.World);
     }
 }

@@ -2551,11 +2551,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 944c99f0efa3b455baa766c5970d87e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 5
+  timePenaltyOnCollision: 5
+  timeDecreaseOnBonus: 10
   bomb: {fileID: 8537157593547538541, guid: ee41d21e846e44c02b38112eb49e9c4d, type: 3}
   bombChance: 0.01
   fire: {fileID: 7823310627285606540, guid: 487806efb9431483bb6cc8a0047e8347, type: 3}
   fireChance: 0.001
+  clock: {fileID: 2177067925205599151, guid: 4a7d2947f2b1b4f58810b364fae04d0b, type: 3}
+  clockChance: 0.01
   walls:
   - {fileID: 2931117690083415870, guid: 4fcc8dbbf40554781b9f267be1afc366, type: 3}
   - {fileID: 7838354125431532205, guid: 6743f2edac7e448e680312bfab0afeb4, type: 3}
