@@ -2554,7 +2554,10 @@ MonoBehaviour:
   timePenalty: 5
   bomb: {fileID: 8537157593547538541, guid: ee41d21e846e44c02b38112eb49e9c4d, type: 3}
   bombChance: 0.01
-  wall: {fileID: 2931117690083415870, guid: 4fcc8dbbf40554781b9f267be1afc366, type: 3}
+  walls:
+  - {fileID: 2931117690083415870, guid: 4fcc8dbbf40554781b9f267be1afc366, type: 3}
+  - {fileID: 7838354125431532205, guid: 6743f2edac7e448e680312bfab0afeb4, type: 3}
+  - {fileID: 6223896484265749022, guid: 1a2a45fe9a94042cf810718231d066d7, type: 3}
   menu: {fileID: 1951369297}
   menuButton: {fileID: 1020788357}
   timerText: {fileID: 992615839}

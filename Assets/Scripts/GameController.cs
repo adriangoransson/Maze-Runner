@@ -10,8 +10,10 @@ public class GameController : MonoBehaviour
     public int timePenalty = 5;
 
     public GameObject bomb;
+    [Range(0, 1)]
     public float bombChance;
-    public GameObject wall;
+    public GameObject[] walls;
+
     public GameObject menu;
     public GameObject menuButton;
     public Text timerText;
@@ -167,6 +169,7 @@ public class GameController : MonoBehaviour
             .BombChance(bombChance)
             .Build();
 
+        System.Random rand = new System.Random(seed);
         for (int row = 0; row < maze.GetLength(0); row++) {
             int x = row - size / 2;
 
@@ -176,6 +179,7 @@ public class GameController : MonoBehaviour
                 Vector3 pos;
                 switch (maze[row, column]) {
                     case MazeGenerator.MazeObject.Wall:
+                        GameObject wall = walls[rand.Next(walls.Length)];
                         pos = new Vector3(x, wall.transform.position.y, z);
                         Instantiate(wall, pos, Quaternion.identity);
                         break;
