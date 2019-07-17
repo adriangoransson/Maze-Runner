@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 517668690620528640}
   - component: {fileID: 8537157592307325491}
   m_Layer: 0
-  m_Name: Dynamite 1
+  m_Name: Dynamite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118,4 +118,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8013a4176e7a04338bf083cbb4cd8d1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosion: {fileID: 100004, guid: bd5a7ae3e8bd4c8499f69e8e45138021, type: 3}
   blastRadius: 1
