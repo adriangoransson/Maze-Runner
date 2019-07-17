@@ -7,6 +7,7 @@
  */
 public class PlayerController : MonoBehaviour
 {
+    public int initialJumps;
     public float speed;
     public float inAirSpeed;
     public float jumpSpeed;
@@ -16,12 +17,33 @@ public class PlayerController : MonoBehaviour
 
     private GameController controller;
     private bool hasStarted;
+
+    private bool jumpPressed;
     private bool inAir;
+
+    private int _jumps;
+
+    public int Jumps {
+        get {
+            return _jumps;
+        }
+        set {
+            _jumps = value;
+            controller.SetJumps(value);
+        }
+    }
 
     void Start()
     {
         GameObject go = GameObject.FindGameObjectWithTag("GameController");
         controller = go.GetComponent<GameController>();
+
+        Jumps = initialJumps;
+    }
+
+    private void Update()
+    {
+        jumpPressed = Input.GetKeyDown(KeyCode.Space);
     }
 
     void FixedUpdate()
@@ -32,7 +54,6 @@ public class PlayerController : MonoBehaviour
 
         float moveH = Input.GetAxis("Horizontal");
         float moveV = Input.GetAxis("Vertical");
-        bool jumpPressed = Input.GetKeyDown(KeyCode.Space);
 
         float factor = speed;
 
@@ -42,17 +63,16 @@ public class PlayerController : MonoBehaviour
         movement = followCamera.transform.TransformDirection(movement);
         movement.y = 0;
 
-        Vector3 jump = Vector3.zero;
-
         if (inAir) {
             factor = inAirSpeed;
-        } else if (jumpPressed) {
-            jump.y = 10;
+        } else if (jumpPressed && Jumps > 0) {
+            inAir = true;
+            Jumps--;
             jumpSound.Play();
+            body.AddForce(new Vector3(0, 10, 0) * jumpSpeed * Time.deltaTime);
         }
 
         body.AddForce(movement * factor * Time.deltaTime);
-        body.AddForce(jump * jumpSpeed * Time.deltaTime);
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -10,6 +10,7 @@ public class MazeGenerator
     private float bombChance;
     private float fireChance;
     private float clockChance;
+    private float jumpChance;
 
     private int emptyPosition;
     private int emptySize;
@@ -24,6 +25,7 @@ public class MazeGenerator
         Bomb,
         Fire,
         Clock,
+        Jump,
     }
 
     public MazeGenerator Size(int size)
@@ -53,6 +55,12 @@ public class MazeGenerator
     public MazeGenerator ClockChance(float chance)
     {
         clockChance = chance;
+        return this;
+    }
+
+    public MazeGenerator JumpChance(float chance)
+    {
+        jumpChance = chance;
         return this;
     }
 
@@ -103,6 +111,8 @@ public class MazeGenerator
                     maze[row, col] = MazeObject.Fire;
                 } else if (rand.NextDouble() < clockChance) {
                     maze[row, col] = MazeObject.Clock;
+                } else if (rand.NextDouble() < jumpChance) {
+                    maze[row, col] = MazeObject.Jump;
                 }
             }
         }

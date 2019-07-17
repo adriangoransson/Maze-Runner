@@ -22,12 +22,17 @@ public class GameController : MonoBehaviour
     [Range(0, 1)]
     public float clockChance;
 
+    public GameObject jumpSymbol;
+    [Range(0, 1)]
+    public float jumpChance;
+
     public GameObject[] walls;
 
     public GameObject menu;
     public GameObject menuButton;
     public Text timerText;
     public Text bestScoreText;
+    public Text jumpsText;
     public BoxCollider boundary;
 
     public GameObject beforeStartText;
@@ -137,6 +142,11 @@ public class GameController : MonoBehaviour
         time -= timeDecreaseOnBonus;
     }
 
+    public void SetJumps(int jumps)
+    {
+        jumpsText.text = "Jumps: " + jumps;
+    }
+
     public void WinGame()
     {
         HighscoreDataManager hsm = new HighscoreDataManager();
@@ -184,6 +194,7 @@ public class GameController : MonoBehaviour
             .BombChance(bombChance)
             .FireChance(fireChance)
             .ClockChance(clockChance)
+            .JumpChance(jumpChance)
             .Build();
 
         System.Random rand = new System.Random(seed);
@@ -211,6 +222,10 @@ public class GameController : MonoBehaviour
                     case MazeGenerator.MazeObject.Clock:
                         pos = new Vector3(x, clock.transform.position.y, z);
                         Instantiate(clock, pos, Quaternion.identity);
+                        break;
+                    case MazeGenerator.MazeObject.Jump:
+                        pos = new Vector3(x, jumpSymbol.transform.position.y, z);
+                        Instantiate(jumpSymbol, pos, Quaternion.identity);
                         break;
                 }
             }
