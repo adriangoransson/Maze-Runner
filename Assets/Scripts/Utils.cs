@@ -6,12 +6,19 @@
     /// <returns>Seconds formatted as mm:ss.</returns>
     public static string SecondsToString(int seconds)
     {
+        string minusSign = "";
+
+        if (seconds < 0) {
+            minusSign = "-";
+            seconds = -seconds;
+        }
+
         int minutes = seconds / 60;
         seconds = seconds % 60;
 
         string min = minutes > 9 ? minutes.ToString() : "0" + minutes;
         string sec = seconds > 9 ? seconds.ToString() : "0" + seconds;
 
-        return min + ":" + sec;
+        return minusSign + min + ":" + sec;
     }
 }
