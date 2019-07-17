@@ -2554,6 +2554,8 @@ MonoBehaviour:
   timePenalty: 5
   bomb: {fileID: 8537157593547538541, guid: ee41d21e846e44c02b38112eb49e9c4d, type: 3}
   bombChance: 0.01
+  fire: {fileID: 7823310627285606540, guid: 487806efb9431483bb6cc8a0047e8347, type: 3}
+  fireChance: 0.001
   walls:
   - {fileID: 2931117690083415870, guid: 4fcc8dbbf40554781b9f267be1afc366, type: 3}
   - {fileID: 7838354125431532205, guid: 6743f2edac7e448e680312bfab0afeb4, type: 3}

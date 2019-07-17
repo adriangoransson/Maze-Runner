@@ -12,6 +12,11 @@ public class GameController : MonoBehaviour
     public GameObject bomb;
     [Range(0, 1)]
     public float bombChance;
+
+    public GameObject fire;
+    [Range(0, 1)]
+    public float fireChance;
+
     public GameObject[] walls;
 
     public GameObject menu;
@@ -167,6 +172,7 @@ public class GameController : MonoBehaviour
             .Seed(seed)
             .EmptyRoom(size / 2, 3)
             .BombChance(bombChance)
+            .FireChance(fireChance)
             .Build();
 
         System.Random rand = new System.Random(seed);
@@ -186,6 +192,10 @@ public class GameController : MonoBehaviour
                     case MazeGenerator.MazeObject.Bomb:
                         pos = new Vector3(x, bomb.transform.position.y, z);
                         Instantiate(bomb, pos, bomb.transform.rotation);
+                        break;
+                    case MazeGenerator.MazeObject.Fire:
+                        pos = new Vector3(x, fire.transform.position.y, z);
+                        Instantiate(fire, pos, Quaternion.identity);
                         break;
                 }
             }

@@ -6,7 +6,10 @@
 public class MazeGenerator
 {
     private int size;
+
     private float bombChance;
+    private float fireChance;
+
     private int emptyPosition;
     private int emptySize;
     private Random rand;
@@ -17,6 +20,7 @@ public class MazeGenerator
         Ground,
         Wall,
         Bomb,
+        Fire,
     }
 
     public MazeGenerator Size(int size)
@@ -34,6 +38,12 @@ public class MazeGenerator
     public MazeGenerator BombChance(float chance)
     {
         bombChance = chance;
+        return this;
+    }
+
+    public MazeGenerator FireChance(float chance)
+    {
+        fireChance = chance;
         return this;
     }
 
@@ -80,6 +90,8 @@ public class MazeGenerator
                     }
                 } else if (rand.NextDouble() < bombChance) {
                     maze[row, col] = MazeObject.Bomb;
+                } else if (rand.NextDouble() < fireChance) {
+                    maze[row, col] = MazeObject.Fire;
                 }
             }
         }
