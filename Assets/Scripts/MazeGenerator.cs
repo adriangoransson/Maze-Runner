@@ -28,15 +28,19 @@ public class MazeGenerator
         Jump,
     }
 
+    public MazeGenerator(Random random)
+    {
+        rand = random;
+    }
+
+    public MazeGenerator(int seed)
+    {
+        rand = new Random(seed);
+    }
+
     public MazeGenerator Size(int size)
     {
         this.size = size;
-        return this;
-    }
-
-    public MazeGenerator Seed(int seed)
-    {
-        rand = new Random(seed);
         return this;
     }
 

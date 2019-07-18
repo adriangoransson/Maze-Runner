@@ -185,11 +185,11 @@ public class GameController : MonoBehaviour
      */
     private void InstantiateMaze()
     {
-        MazeGenerator mg = new MazeGenerator();
+        System.Random rand = new System.Random(seed);
+        MazeGenerator mg = new MazeGenerator(rand);
 
         MazeGenerator.MazeObject[,] maze = mg
             .Size(size)
-            .Seed(seed)
             .EmptyRoom(size / 2, 3)
             .BombChance(bombChance)
             .FireChance(fireChance)
@@ -197,7 +197,6 @@ public class GameController : MonoBehaviour
             .JumpChance(jumpChance)
             .Build();
 
-        System.Random rand = new System.Random(seed);
         for (int row = 0; row < maze.GetLength(0); row++) {
             int x = row - size / 2;
 
