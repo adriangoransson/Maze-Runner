@@ -203,30 +203,33 @@ public class GameController : MonoBehaviour
             for (int column = 0; column < maze.GetLength(1); column++) {
                 int z = column - size / 2;
 
-                Vector3 pos;
+                GameObject newGameObject;
                 switch (maze[row, column]) {
+                    case MazeGenerator.MazeObject.Ground:
+                        continue;
+
                     case MazeGenerator.MazeObject.Wall:
-                        GameObject wall = walls[rand.Next(walls.Length)];
-                        pos = new Vector3(x, wall.transform.position.y, z);
-                        Instantiate(wall, pos, Quaternion.identity);
+                        newGameObject = walls[rand.Next(walls.Length)];
                         break;
                     case MazeGenerator.MazeObject.Bomb:
-                        pos = new Vector3(x, bomb.transform.position.y, z);
-                        Instantiate(bomb, pos, bomb.transform.rotation);
+                        newGameObject = bomb;
                         break;
                     case MazeGenerator.MazeObject.Fire:
-                        pos = new Vector3(x, fire.transform.position.y, z);
-                        Instantiate(fire, pos, Quaternion.identity);
+                        newGameObject = fire;
                         break;
                     case MazeGenerator.MazeObject.Clock:
-                        pos = new Vector3(x, clock.transform.position.y, z);
-                        Instantiate(clock, pos, Quaternion.identity);
+                        newGameObject = clock;
                         break;
                     case MazeGenerator.MazeObject.Jump:
-                        pos = new Vector3(x, jumpSymbol.transform.position.y, z);
-                        Instantiate(jumpSymbol, pos, Quaternion.identity);
+                        newGameObject = jumpSymbol;
                         break;
+
+                    default:
+                        throw new UnityException("Unknown MazeObject " + maze[row, column]);
                 }
+
+                Vector3 pos = new Vector3(x, newGameObject.transform.position.y, z);
+                Instantiate(newGameObject, pos, newGameObject.transform.rotation);
             }
         }
     }
