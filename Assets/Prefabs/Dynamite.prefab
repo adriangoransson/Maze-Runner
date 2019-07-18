@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abf9fd12243b842329176ff9dfab82e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speedMultiplier: 1
 --- !u!136 &517668690620528640
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -119,4 +120,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 100004, guid: bd5a7ae3e8bd4c8499f69e8e45138021, type: 3}
-  blastRadius: 1
+  blastRadius: 2
