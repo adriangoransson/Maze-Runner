@@ -870,13 +870,13 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: '<size=45><b>World objects</b></size>
 
+    <b>Rabbits</b>: Add jump
+
     <b>Fire</b>: Game over, avoid!
 
     <b>Clock</b>: Decrease 10 seconds
 
-    <b>Dynamite</b>: Blow up nearby walls
-
-    <b>Floating plus signs (+)</b>: Add jump'
+    <b>Dynamite</b>: Blow up nearby walls'
 --- !u!222 &653711466
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2759,7 +2759,7 @@ MonoBehaviour:
   fireChance: 0.001
   clock: {fileID: 2177067925205599151, guid: 4a7d2947f2b1b4f58810b364fae04d0b, type: 3}
   clockChance: 0.01
-  jumpSymbol: {fileID: 1685832985922957195, guid: 607a88357aadc4c0f8d083c1a4f0b9b0,
+  jumpSymbol: {fileID: 3051781738567637838, guid: aad4bfb4013cc44928578a95b2f9abd2,
     type: 3}
   jumpChance: 0.01
   walls:
