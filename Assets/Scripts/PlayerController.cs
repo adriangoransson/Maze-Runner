@@ -1,4 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
+
+// This is necessary to expose the event in the editor inspector.
+[System.Serializable]
+public class UnityEventWithIntParam : UnityEvent<int> { }
 
 /*
  * Player controller. Listens for control input and applies force to body.
@@ -15,7 +20,10 @@ public class PlayerController : MonoBehaviour
     public AudioSource bumpSound;
     public AudioSource jumpSound;
 
-    private GameController controller;
+    public UnityEventWithIntParam onJumpUpdate;
+    public UnityEvent onInAirCollision;
+    public UnityEvent onCollision;
+
     private bool hasStarted;
 
     private bool jumpPressed;
@@ -29,15 +37,12 @@ public class PlayerController : MonoBehaviour
         }
         set {
             _jumps = value;
-            controller.SetJumps(value);
+            onJumpUpdate.Invoke(value);
         }
     }
 
     void Start()
     {
-        GameObject go = GameObject.FindGameObjectWithTag("GameController");
-        controller = go.GetComponent<GameController>();
-
         Jumps = initialJumps;
     }
 
@@ -84,9 +89,9 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.tag == "Wall") {
             if (inAir) {
-                controller.GameOver();
+                onInAirCollision.Invoke();
             } else {
-                controller.AddPenalty();
+                onCollision.Invoke();
                 bumpSound.Play();
             }
         }
