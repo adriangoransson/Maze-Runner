@@ -2,6 +2,8 @@
 
 public class JumpPickupController : MonoBehaviour
 {
+    public AudioClip audioClip;
+
     private PlayerController playerController;
 
     private void Start()
@@ -17,8 +19,9 @@ public class JumpPickupController : MonoBehaviour
             return;
         }
 
-        playerController.Jumps++;
+        AudioSource.PlayClipAtPoint(audioClip, transform.position);
 
+        playerController.Jumps++;
         Destroy(gameObject);
     }
 }
